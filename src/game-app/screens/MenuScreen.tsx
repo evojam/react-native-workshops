@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
+import { NavigationScreenProps } from 'react-navigation'
 
-export class MenuScreen extends React.Component<{}> {
+export class MenuScreen extends React.Component<NavigationScreenProps> {
 
   public render(): React.ReactNode {
     return (
@@ -18,7 +19,7 @@ export class MenuScreen extends React.Component<{}> {
   }
 
   private readonly onStartPress = () => {
-    console.log('start') // tslint:disable-line no-console
+    this.props.navigation.navigate('Game')
   }
 
   private readonly onOptionsPress = () => {

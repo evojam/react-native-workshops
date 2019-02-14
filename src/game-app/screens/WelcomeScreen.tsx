@@ -1,5 +1,7 @@
+// tslint:disable
 import * as React from 'react'
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { NavigationScreenProps } from 'react-navigation'
 
 type WelcomeState = {
   readonly springValue: Animated.Value,
@@ -8,7 +10,7 @@ type WelcomeState = {
 const source = require('../../../assets/logo.png') // tslint:disable-line no-require-imports no-var-requires
 const MIN_ANIMATED_VALUE = 0.3
 
-export class WelcomeScreen extends React.Component<{}, WelcomeState> {
+export class WelcomeScreen extends React.Component<NavigationScreenProps, WelcomeState> {
 
   public readonly state: WelcomeState = {
     springValue: new Animated.Value(MIN_ANIMATED_VALUE),
@@ -17,7 +19,7 @@ export class WelcomeScreen extends React.Component<{}, WelcomeState> {
   public render(): React.ReactNode {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.touchable} onPress={this.animateSpring}>
+        <TouchableOpacity style={styles.touchable} onPress={this.handleClick}>
           <Animated.Image
             source={source}
             style={[styles.image, { transform: [{ scale: this.state.springValue } ] }]}
@@ -28,6 +30,10 @@ export class WelcomeScreen extends React.Component<{}, WelcomeState> {
       </View>
     )
   }
+
+  public handleClick = (): void => {
+    this.props.navigation.navigate('Menu');
+  };
 
   public componentDidMount(): void {
     this.spring()
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 125,
-    marginBottom: 30,
+    margin: 30,
     width: 112,
   },
   titleText: {
